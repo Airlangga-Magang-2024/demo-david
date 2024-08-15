@@ -54,8 +54,8 @@ return new class extends Migration
                 ->default(0.00)
                 ->unsigned();
             $table->string('volume_unit')->default('l');
-          
-            
+
+
             $table->timestamps();
         });
     }

@@ -1,28 +1,25 @@
 <?php
 
-namespace App\Models\Shop;
-
+namespace App\Models\shop;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Address;
 
 class Customer extends Model
 {
     use HasFactory;
-    use SoftDeletes;
-
-    protected $table = 'customers';
 
     protected $fillable = [
         'name',
+        'brands_id',
         'email',
         'phone',
         'birthday',
-        
-        // Tambahkan atribut lain sesuai kebutuhan
     ];
 
-
+    public function addresses()
+    {
+        return $this->morphMany(Address::class, 'addressable');
+    }
 }

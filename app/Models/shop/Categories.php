@@ -11,10 +11,10 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 
-class Categorie extends Model
+class Categories extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'categories'; // Pastikan ini sesuai dengan nama tabel di database
 
     // Atribut yang dapat diisi secara massal
@@ -38,12 +38,12 @@ class Categorie extends Model
     // Definisi relasi parent (kategori induk)
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(Categorie::class, 'parent_id');
+        return $this->belongsTo(Categories::class, 'parent_id');
     }
 
     // Definisi relasi children (kategori anak)
     public function children(): HasMany
     {
-        return $this->hasMany(Categorie::class, 'parent_id');
+        return $this->hasMany(Categories::class, 'parent_id');
     }
 }

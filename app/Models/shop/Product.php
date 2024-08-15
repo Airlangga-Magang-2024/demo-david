@@ -14,7 +14,7 @@ class Product extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-   
+
 
     /**
      * @var array<string, string>
@@ -26,7 +26,7 @@ class Product extends Model implements HasMedia
         'requires_shipping' => 'boolean',
         'published_at' => 'date',
     ];
-    
+
     protected $table = 'products';
 
     protected $guarded = [];
@@ -38,7 +38,7 @@ class Product extends Model implements HasMedia
 
     public function categories(): BelongsTo
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Categories::class);
     }
-    
+
 }

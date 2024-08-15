@@ -13,8 +13,19 @@ class ShopProduct extends Cluster
         return 'Products';
     }
 
+
+
     public static function getNavigationGroup(): ?string
     {
         return 'Shop';
     }
+
+
+
+    
+
+
+
+
+
 }

@@ -1,9 +1,9 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategorieResource\Pages;
-use App\Filament\Resources\CategorieResource\RelationManagers;
-use App\Models\shop\Categorie;
+use App\Filament\Resources\CategoriesResource\Pages;
+use App\Filament\Resources\CategoriesResource\RelationManagers;
+use App\Models\shop\Categories;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use App\Filament\Clusters\ShopProduct;
 
-class CategorieResource extends Resource
+class CategoriesResource extends Resource
 {
-    protected static ?string $model = Categorie::class; // Pastikan ini sesuai dengan nama model
+    protected static ?string $model = categories::class; // Pastikan ini sesuai dengan nama model
     protected static ?int $navigationSort = 2;
     protected static ?string $cluster = ShopProduct::class;
     protected static ?string $navigationIcon = 'heroicon-o-tag';
@@ -40,7 +40,7 @@ class CategorieResource extends Resource
                                     ->required()
                                     ->maxLength(255)
                                     ->nullable()
-                                    ->unique(Categorie::class, 'slug', ignoreRecord: true),
+                                    ->unique(categories::class, 'slug', ignoreRecord: true),
                             ]),
 
                         Forms\Components\Select::make('parent_id')
@@ -56,19 +56,19 @@ class CategorieResource extends Resource
                         Forms\Components\MarkdownEditor::make('description')
                             ->label('Description'),
                     ])
-                    ->columnSpan(['lg' => fn (?Categorie $record) => $record === null ? 3 : 2]),
+                    ->columnSpan(['lg' => fn (?categories $record) => $record === null ? 3 : 2]),
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
-                            ->content(fn (Categorie $record): ?string => $record->created_at?->diffForHumans()),
+                            ->content(fn (categories $record): ?string => $record->created_at?->diffForHumans()),
 
                         Forms\Components\Placeholder::make('updated_at')
                             ->label('Last modified at')
-                            ->content(fn (Categorie $record): ?string => $record->updated_at?->diffForHumans()),
+                            ->content(fn (categories $record): ?string => $record->updated_at?->diffForHumans()),
                     ])
                     ->columnSpan(['lg' => 1])
-                    ->hidden(fn (?Categorie $record) => $record === null),
+                    ->hidden(fn (?categories $record) => $record === null),
             ])
             ->columns(3);
     }
@@ -88,7 +88,7 @@ class CategorieResource extends Resource
                 ->sortable()
                 ->searchable(),
 
-           
+
 
             Tables\Columns\BooleanColumn::make('is_visible')
                 ->label('Visible')
@@ -121,15 +121,18 @@ class CategorieResource extends Resource
     {
         return [
             // Define relations here
+            // RelationManagers\ProductsRelationManager::class,
+            \App\Filament\Resources\CategoriesResource\RelationManagers\ProductsRelationManager::class,
+
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategorie::route('/create'),
-            'edit' => Pages\EditCategorie::route('/{record}/edit'),
+            'index' => Pages\Listcategories::route('/'),
+            'create' => Pages\Createcategories::route('/create'),
+            'edit' => Pages\Editcategories::route('/{record}/edit'),
         ];
     }
 }

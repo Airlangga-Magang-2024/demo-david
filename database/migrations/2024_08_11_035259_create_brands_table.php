@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('website')->nullable(); // atau gunakan tipe dan batasan lain yang sesuai
-    
             $table->longText('description')->nullable();
             $table->unsignedSmallInteger('position')->default(0);
             $table->boolean('is_visible')->default(false);

@@ -24,7 +24,6 @@ class CustomerResource extends Resource
 
 
 
-
     public static function form(Form $form): Form
     {
         return $form
@@ -65,25 +64,27 @@ class CustomerResource extends Resource
                 ->hidden(fn (?Customer $record) => $record === null),
         ])
         ->columns(3);
-    }
-
+}
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(isIndividual: true)
-                    ->sortable(),
+                ->label('Name')
+                ->sortable()
+                ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->label('Email address')
-                    ->searchable(isIndividual: true, isGlobal: false)
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('country'),
-                    // ->getStateUsing(fn ($record): ?string => Country::find($record->addresses->first()?->country)?->name ?? null),
+                ->label('Email')
+                ->sortable()
+                ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
-                    ->searchable()
-                    ->sortable(),
+                ->label('Nomer Handphone')
+                ->sortable()
+                ->searchable(),
+                Tables\Columns\TextColumn::make('birthday')
+                ->label('Tanngal Lahir')
+                ->sortable()
+                ->searchable(),
             ])
             ->filters([
                 //
@@ -102,6 +103,7 @@ class CustomerResource extends Resource
     {
         return [
             //
+            RelationManagers\AddressRelationManager::class,
         ];
     }
 

@@ -2,27 +2,34 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Models\shop\Product;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Support\Str; // Tambahkan ini
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\shop\Product;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Toggle;
 use App\Filament\Clusters\ShopProduct;
-use Filament\Infolists\Components\RepeatableEntry;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Infolists\Components\TextEntry;
+use Illuminate\Support\Str; // Tambahkan ini
+use Filament\Forms\Components\MarkdownEditor;
+use App\Filament\Resources\ProductResource\Pages;
+use Filament\Infolists\Components\RepeatableEntry;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Filament\Resources\ProductResource\Widgets\CustomerOverview;
+
+
+
+
+
+
 
 
 
@@ -36,11 +43,12 @@ class ProductResource extends Resource
     protected static ?string $cluster = ShopProduct::class;
 
     protected static ?string $model = Product::class;
-    
+
 
     protected static ?string $navigationIcon = 'heroicon-o-bolt';
 
     public static function form(Form $form): Form
+
     {
         return $form
 
@@ -251,6 +259,7 @@ class ProductResource extends Resource
     {
         return [
             //
+           
         ];
     }
 
@@ -262,4 +271,14 @@ class ProductResource extends Resource
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
+
+
+    public static function getWidgets(): array
+    {
+    return [
+        CustomerOverview::class,
+    ];
+    }
+
+
 }

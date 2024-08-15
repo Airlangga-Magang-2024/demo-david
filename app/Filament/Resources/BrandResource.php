@@ -114,6 +114,8 @@ class BrandResource extends Resource
     {
         return [
             //
+            // BrandResource::getRelations()
+            \App\Filament\Resources\BrandResource\RelationManagers\ProductsRelationManager::class,
         ];
     }
 
