@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\shop;
+namespace App\Models\Shop;
 
-use App\Models\shop\Brand;
+use App\Models\Shop\Brand;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -15,10 +15,6 @@ class Product extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
 
-
-    /**
-     * @var array<string, string>
-     */
     protected $casts = [
         'featured' => 'boolean',
         'is_visible' => 'boolean',
@@ -40,5 +36,12 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsTo(Categories::class);
     }
+
+    public function registerMediaCollections(): void
+{
+    $this->addMediaCollection('product-images')
+         ->singleFile();
+}
+
 
 }

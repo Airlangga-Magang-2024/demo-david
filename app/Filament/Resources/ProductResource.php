@@ -6,7 +6,7 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Models\shop\Product;
+use App\Models\Shop\Product;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Toggle;
 use App\Filament\Clusters\ShopProduct;
@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Filament\Resources\ProductResource\Widgets\CustomerOverview;
+use App\Filament\Resources\ProductResource\Widgets\ProductStats;
 
 
 
@@ -47,9 +48,12 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-bolt';
 
+
     public static function form(Form $form): Form
 
     {
+
+
         return $form
 
                 ->schema([
@@ -81,16 +85,15 @@ class ProductResource extends Resource
                                 ])
                                 ->columns(2),
 
+
                                 Forms\Components\Section::make('Images')
                                 ->schema([
-
-                                SpatieMediaLibraryFileUpload::make('media')
-                                // FileUpload::make('media')
-                                    // ->collection('product-images')
-                                    // ->multiple()
-                                    // ->maxFiles(5)
-                                    ->hiddenLabel(),
-                            ])
+                                    SpatieMediaLibraryFileUpload::make('media')
+                                        ->collection('product-images')
+                                        ->multiple()
+                                        ->maxFiles(5)
+                                        ->hiddenLabel(),
+                                ])
                             ->collapsible(),
 
 
@@ -98,10 +101,10 @@ class ProductResource extends Resource
 
                             Forms\Components\Section::make('Pricing')
                                 ->schema([
-                                    Forms\Components\TextInput::make('price')
-                                        ->numeric()
-                                        ->rules(['regex:/^\d{1,6}(\.\d{0,2})?$/'])
-                                        ->required(),
+                                    \Filament\Forms\Components\TextInput::make('price')
+                                    ->currencyMask(thousandSeparator: ',',decimalSeparator: '.',precision: 2)
+                                    ->required(),
+
 
                                     Forms\Components\TextInput::make('old_price')
                                         ->label('Compare at price')
@@ -198,7 +201,9 @@ class ProductResource extends Resource
             ->columns([
                 //
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('product-image')
-                ->label('Image'),
+                ->label('Image')
+                ->collection('product-images'),
+
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('brands.name')
                 // ->searchable()
@@ -210,10 +215,9 @@ class ProductResource extends Resource
                 ->sortable()
                 ->toggleable(),
 
-            Tables\Columns\TextColumn::make('price')
-                ->label('Price')
-                ->searchable()
-                ->sortable(),
+                \Filament\Tables\Columns\TextColumn::make('price')
+                ->currency('IDR')
+                ->formatStateUsing(fn ($state) =>'RP '.number_format($state, 2, '.',',')),
 
             Tables\Columns\TextColumn::make('sku')
                 ->label('SKU')
@@ -259,9 +263,17 @@ class ProductResource extends Resource
     {
         return [
             //
-           
+
         ];
     }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ProductStats::class,
+        ];
+    }
+
 
     public static function getPages(): array
     {
@@ -272,13 +284,20 @@ class ProductResource extends Resource
         ];
     }
 
-
-    public static function getWidgets(): array
+    protected function getHeaderWidgets(): array
     {
-    return [
-        CustomerOverview::class,
-    ];
+        return [
+            ProductStats::class,
+        ];
     }
+
+
+    // public static function getWidgets(): array
+    // {
+    // return [
+    //     CustomerOverview::class,
+    // ];
+    // }
 
 
 }

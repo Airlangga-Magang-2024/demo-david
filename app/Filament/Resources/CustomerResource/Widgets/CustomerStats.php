@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Filament\Resources\ProductResource\Widgets;
+namespace App\Filament\Resources\CustomerResource\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class CustomerOverview extends BaseWidget
+class CustomerStats extends BaseWidget
 {
     protected function getStats(): array
     {

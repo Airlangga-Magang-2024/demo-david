@@ -24,11 +24,7 @@ class ProductsRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-        return $table
-            ->recordTitleAttribute('name')
-            ->columns([
-                Tables\Columns\TextColumn::make('name'),
-            ])
+        return ProductResource::table($table)
             ->filters([
                 //
             ])
