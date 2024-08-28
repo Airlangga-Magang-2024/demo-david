@@ -31,4 +31,15 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    protected static function booted()
+    {
+        static::saved(function (OrderItem $item) {
+            $item->order->updateTotalPrice();
+        });
+
+        static::deleted(function (OrderItem $item) {
+            $item->order->updateTotalPrice();
+        });
+    }
 }

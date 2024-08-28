@@ -6,6 +6,9 @@ use App\Filament\Imports\Blog\CategoryImporter;
 use App\Filament\Resources\Blog\CategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 
 class ManageCategories extends ManageRecords
 {
@@ -14,9 +17,21 @@ class ManageCategories extends ManageRecords
     protected function getActions(): array
     {
         return [
-            Actions\ImportAction::make()
-                ->importer(CategoryImporter::class),
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+            // ->use(CategoryResource::class)
+            // ->importer(CategoryImporter::class)
+            ,
             Actions\CreateAction::make(),
+            ExportAction::make()
+            ->exports([
+                ExcelExport::make()
+                    ->fromTable()
+                    ->withFilename(fn ($resource) => $resource::getModelLabel() . '-' . date('Y-m-d'))
+                    ->withWriterType(\Maatwebsite\Excel\Excel::CSV)
+                    ->withColumns([
+                        Column::make('updated_at'),
+                    ])
+            ]),
         ];
     }
 }

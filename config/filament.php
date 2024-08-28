@@ -12,6 +12,10 @@ return [
     // provider lainnya
     ],
 
+    'database_notification' => [
+        'enabled' => true,
+        'polling_interval' => '5s',
+    ],
 
     /*
     |--------------------------------------------------------------------------

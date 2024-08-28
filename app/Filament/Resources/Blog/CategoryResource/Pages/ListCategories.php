@@ -6,6 +6,7 @@ use App\Filament\Resources\Blog\CategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
+
 class ListCategories extends ListRecords
 {
     protected static string $resource = CategoryResource::class;

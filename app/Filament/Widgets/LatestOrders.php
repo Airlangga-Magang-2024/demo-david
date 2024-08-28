@@ -12,6 +12,8 @@ use Filament\Navigation\Menu;
 class LatestOrders extends BaseWidget
 {
 
+    protected static ?int $sort = 100;
+
     protected int | string |array $columnSpan = "full";
 
     public function table(Table $table): Table
@@ -62,7 +64,11 @@ class LatestOrders extends BaseWidget
                     ])
 
                 ->actions([
-                    Tables\Actions\EditAction::make(),
+                    // Tables\Actions\EditAction::make(),
+                    Tables\Actions\EditAction::make()
+                    ->url(fn ($record) => OrderResource::getUrl('index', ['record' => $record]))
+                    ->label('Open')
+
                     ]);
 
 

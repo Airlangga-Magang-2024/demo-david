@@ -61,21 +61,59 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_visible')
-                    ->label('Visibility'),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Last Updated')
-                    ->date(),
-            ])
+                // Tables\Columns\TextColumn::make('id')
+                // ->label('ID')
+                // ->sortable()
+                // ->searchable(),
+
+            Tables\Columns\TextColumn::make('name')
+                ->label('Name')
+                ->sortable()
+                ->searchable(),
+
+            Tables\Columns\TextColumn::make('slug')
+                ->label('Slug')
+                ->sortable()
+                ->searchable(),
+
+            Tables\Columns\TextColumn::make('description')
+                ->label('Description')
+                ->limit(50) // Membatasi panjang teks yang ditampilkan
+                ->sortable()
+                ->searchable(),
+
+            Tables\Columns\BooleanColumn::make('is_visible')
+                ->label('Visible')
+                ->sortable(),
+
+            // Tables\Columns\TextColumn::make('seo_title')
+            //     ->label('SEO Title')
+            //     ->sortable()
+            //     ->searchable()
+            //     ->toggleable(),
+
+            // Tables\Columns\TextColumn::make('seo_description')
+            //     ->label('SEO Description')
+            //     ->limit(50) // Membatasi panjang teks yang ditampilkan
+            //     ->sortable()
+            //     ->searchable()
+            //     ->toggleable(),
+
+
+
+
+
+            ]
+
+
+            )
+
+
             ->filters([
                 //
+                // Tables\Filters\TrashedFilter::make(),
             ])
+
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),

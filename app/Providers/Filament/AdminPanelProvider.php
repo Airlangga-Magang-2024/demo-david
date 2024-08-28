@@ -19,13 +19,20 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Resources\OrderResource\Widgets\OrderStats;
 use App\Filament\Resources\ProductResource\Widgets\ProductStats;
+use App\Filament\Widgets\CustomersChart;
+use App\Filament\Widgets\LatestOrders;
+use App\Filament\Widgets\OrdersChart;
+
+use App\Filament\Widgets\StatsOverviewWidget;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
 
-
+            // ->databaseNotifications()
+            // ->databaseNotificationsPolling('2s')
             ->sidebarCollapsibleOnDesktop()
             ->brandLogo(asset('images/logo.png'))
             ->brandName('Prelude')
@@ -49,10 +56,11 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                // OrderStats::class,
-                // ProductStats::class,
+                OrdersChart::class,
+                CustomersChart::class,
+                StatsOverviewWidget::class,
                 // Widgets\OrderStats::class,
-                // Widgets\FilamentInfoWidget::class,
+                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

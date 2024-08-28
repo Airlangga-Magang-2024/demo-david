@@ -104,7 +104,20 @@ class Order extends Model
             $order->total_price = $order->getTotalPriceAttribute();
             $order->shipping_price = $order->getShippingPriceAttribute();
         });
+
+        static::saved(function (Order $order) {
+            $order->updateTotalPrice();
+        });
+
+        static::deleted(function (Order $order) {
+            $order->updateTotalPrice();
+        });
     }
+    public function updateTotalPrice(): void
+{
+    $this->total_price = $this->getTotalPriceAttribute();
+    $this->saveQuietly(); // Hindari loop infinit
+}
 
     // /** @return HasMany<Payment> */
     // public function payments(): HasMany

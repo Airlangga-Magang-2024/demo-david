@@ -33,6 +33,8 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
+    
+
     protected static ?string $navigationGroup = 'Shop';
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
@@ -99,14 +101,22 @@ class OrderResource extends Resource
                 // \Tables\Columns\TextColumn::make('money')
                 //     ->currency('USD')
                 //     ->summarize(\Filament\Tables\Columns\Summarizers\Sum::make()->currency()),
+                // Tables\Columns\TextColumn::make('total_price')
+                //  ->formatStateUsing(fn ($state) => '$' . number_format($state, 0, '.', ','))
+                //  ->searchable()
+                //  ->sortable()
+                //  ->summarize([
+                // Tables\Columns\Summarizers\Sum::make()
+                //  ->formatStateUsing(fn ($state) => '$' . number_format($state, 0, '.', ',')), // Format angka pada summary
+                //     ]),
                 Tables\Columns\TextColumn::make('total_price')
-                 ->formatStateUsing(fn ($state) => '$' . number_format($state, 0, '.', ','))
-                 ->searchable()
-                 ->sortable()
-                 ->summarize([
-                Tables\Columns\Summarizers\Sum::make()
-                 ->formatStateUsing(fn ($state) => '$' . number_format($state, 0, '.', ',')), // Format angka pada summary
-                    ]),
+    ->formatStateUsing(fn ($state) => '$' . number_format($state, 0, '.', ','))
+    ->searchable()
+    ->sortable()
+    ->summarize([
+        Tables\Columns\Summarizers\Sum::make()
+            ->formatStateUsing(fn ($state) => '$' . number_format($state, 0, '.', ',')),
+    ]),
                 Tables\Columns\TextColumn::make('shipping_price')
                     ->label('Shipping cost')
                     ->formatStateUsing(fn ($state) => '$' . number_format($state, 0, '.', ','))
