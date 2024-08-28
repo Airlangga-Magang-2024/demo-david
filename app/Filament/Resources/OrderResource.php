@@ -327,7 +327,8 @@ class OrderResource extends Resource
 
             Forms\Components\TextInput::make('unit_price')
                 ->label('Unit Price')
-                ->formatStateUsing(fn ($state) => '$' .number_format($state, 0, '.', ',')) // Format angka pada summary
+                ->currencyMask(thousandSeparator: ',',decimalSeparator: '.',precision: 0)
+                // ->formatStateUsing(fn ($state) => '$' .number_format($state, 0, '.', ',')) // Format angka pada summary
                 ->disabled()
                 ->dehydrated()
                 ->numeric()

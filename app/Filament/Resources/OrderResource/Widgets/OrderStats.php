@@ -16,10 +16,6 @@ class OrderStats extends BaseWidget
 
     protected static ?string $pollingInterval = null;
 
-    // public function mount(): void
-    // {
-    //     $this->tableColumnSearches = []; // Inisialisasi properti di sini
-    // }
 
     public array $tableColumnSearches = [];
 
@@ -39,7 +35,7 @@ class OrderStats extends BaseWidget
     //     return parent::getPageTableQuery();
     // }
 
-    
+
 
     protected function getStats(): array
     {

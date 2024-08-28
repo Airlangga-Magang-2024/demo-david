@@ -27,16 +27,6 @@ use App\Filament\Resources\ProductResource\Widgets\CustomerOverview;
 use App\Filament\Resources\ProductResource\Widgets\ProductStats;
 
 
-
-
-
-
-
-
-
-
-
-
 class ProductResource extends Resource
 {
     protected static ?int $navigationSort = 0;
@@ -45,6 +35,8 @@ class ProductResource extends Resource
 
     protected static ?string $model = Product::class;
 
+
+    protected array $tableColumnSearches = [];
 
     protected static ?string $navigationIcon = 'heroicon-o-bolt';
 
@@ -86,15 +78,22 @@ class ProductResource extends Resource
                                 ->columns(2),
 
 
-                                Forms\Components\Section::make('Images')
-                                ->schema([
-                                    SpatieMediaLibraryFileUpload::make('media')
-                                        ->collection('product-images')
-                                        ->multiple()
-                                        ->maxFiles(5)
-                                        ->hiddenLabel(),
-                                ])
-                            ->collapsible(),
+                            //     Forms\Components\Section::make('Images')
+                            //     ->schema([
+                            //         SpatieMediaLibraryFileUpload::make('media')
+                            //             ->collection('product-images')
+                            //             ->multiple()
+                            //             ->maxFiles(5)
+                            //             ->hiddenLabel(),
+                            //     ])
+                            // ->collapsible(),
+                             Forms\Components\Section::make('Image')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->image()
+                            ->hiddenLabel(),
+                    ])
+                    ->collapsible(),
 
 
 
@@ -200,9 +199,8 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 //
-                Tables\Columns\SpatieMediaLibraryImageColumn::make('product-image')
-                ->label('Image')
-                ->collection('product-images'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image'),
 
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('brands.name')
@@ -217,7 +215,7 @@ class ProductResource extends Resource
 
                 \Filament\Tables\Columns\TextColumn::make('price')
                 ->currency('IDR')
-                ->formatStateUsing(fn ($state) =>'RP '.number_format($state, 2, '.',',')),
+                ->formatStateUsing(fn ($state) =>'RP '.number_format($state, 0, '.',',')),
 
             Tables\Columns\TextColumn::make('sku')
                 ->label('SKU')
@@ -270,7 +268,7 @@ class ProductResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            ProductStats::class,
+            // ProductStats::class,
         ];
     }
 
@@ -287,7 +285,7 @@ class ProductResource extends Resource
     protected function getHeaderWidgets(): array
     {
         return [
-            ProductStats::class,
+            // 
         ];
     }
 

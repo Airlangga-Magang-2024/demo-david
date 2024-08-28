@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Filament\Resources\ProductResource\Widgets\ProductStats;
 use Illuminate\Support\ServiceProvider;
+use Filament\Filament;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        
+
+        // Filament::registerWidgets([
+        //     ProductStats::class,
+        // ]);
         //
     }
 }

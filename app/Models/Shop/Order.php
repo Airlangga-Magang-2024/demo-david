@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory,
+    SoftDeletes;
 
     /**
      * @var string
@@ -110,4 +111,6 @@ class Order extends Model
     // {
     //     return $this->hasMany(Payment::class);
     // }
+
+
 }

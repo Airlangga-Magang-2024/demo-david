@@ -9,6 +9,8 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
 use Filament\Tables\Table;
 
 class AuthorResource extends Resource
@@ -75,17 +77,19 @@ class AuthorResource extends Resource
 
                     Tables\Columns\Layout\Stack::make([
                         Tables\Columns\TextColumn::make('github_handle')
-                            // ->icon('heroicon-o-github')
+                            ->icon('bi-github')
                             ->label('GitHub')
                             ->alignLeft(),
 
                         Tables\Columns\TextColumn::make('twitter_handle')
-                            // ->icon('heroicon-o-twitter')
+                            ->icon('vaadin-twitter')
                             ->label('Twitter')
                             ->alignLeft(),
                     ])->space(2),
                 ])->from('md'),
             ])
+
+
             ->filters([
                 //
             ])
@@ -101,6 +105,11 @@ class AuthorResource extends Resource
                             ->warning()
                             ->send();
                     }),
+
+
+            ])
+            ->bulkActions([
+                ExportBulkAction::make()
             ]);
     }
 

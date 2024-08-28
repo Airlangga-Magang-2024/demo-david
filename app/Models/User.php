@@ -10,11 +10,11 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 
 class User extends Authenticatable
 {
@@ -22,6 +22,8 @@ class User extends Authenticatable
     // use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use HasRoles;
+    use HasPanelShield;
 
 
     /**
@@ -51,10 +53,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return true;
-    }
+    // public function canAccessPanel(Panel $panel): bool
+    // {
+    //     return true;
+    // }
 
     public function canAccessTenant(Model $tenant): bool
     {

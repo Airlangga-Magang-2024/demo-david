@@ -6,6 +6,7 @@ use App\Filament\Exports\Blog\AuthorExporter;
 use App\Filament\Resources\Blog\AuthorResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ManageAuthors extends ManageRecords
 {
@@ -14,8 +15,7 @@ class ManageAuthors extends ManageRecords
     protected function getActions(): array
     {
         return [
-            Actions\ExportAction::make()
-                ->exporter(AuthorExporter::class),
+            
             Actions\CreateAction::make(),
         ];
     }
