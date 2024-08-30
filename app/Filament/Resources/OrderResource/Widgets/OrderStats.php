@@ -50,7 +50,7 @@ class OrderStats extends BaseWidget
             $query = $this->getPageTableQuery();
 
         return [
-            Stat::make('Orders', $orderData->sum('count'))
+            Stat::make('Orders', $this->getPageTableQuery()->count())
                 ->chart(
                     $orderData
                         ->map(fn (TrendValue $value) => $value->aggregate)

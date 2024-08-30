@@ -113,11 +113,12 @@ class Order extends Model
             $order->updateTotalPrice();
         });
     }
+    
     public function updateTotalPrice(): void
-{
+    {
     $this->total_price = $this->getTotalPriceAttribute();
-    $this->saveQuietly(); // Hindari loop infinit
-}
+    $this->saveQuietly();
+    }
 
     // /** @return HasMany<Payment> */
     // public function payments(): HasMany

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\OrderResource\Pages;
 
 use Filament\Actions;
 use App\Filament\Resources\OrderResource;
+
 use App\Models\Shop\Order;
 use App\Models\User;
 use Filament\Forms\Components\Section;
@@ -41,17 +42,19 @@ class CreateOrder extends CreateRecord
         $order = $this->record;
 
         /** @var User $user */
-        // $user = auth()->user();
+        $user = auth()->user();
 
         Notification::make()
-            ->title('New order')
-            ->icon('heroicon-o-shopping-bag')
-            ->body("**{$order->customer?->name} ordered {$order->items->count()} products.**")
-            ->actions([
-                Action::make('View')
-                    ->url(OrderResource::getUrl('edit', ['record' => $order])),
-            ]);
-            // ->sendToDatabase($user);
+        ->title('New order')
+        ->icon('heroicon-o-shopping-bag')
+        ->body("**{$order->customer?->name} ordered {$order->items->count()} products.**")
+        ->actions([
+            Action::make('View')
+                ->url(OrderResource::getUrl('edit', ['record' => $order])),
+        ])
+
+            ->sendToDatabase($user)
+            ->send();
     }
 
     /** @return Step[] */

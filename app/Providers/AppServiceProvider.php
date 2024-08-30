@@ -17,6 +17,13 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
+    protected $policies = [
+        'Spatie\Permission\Models\Role' => 'App\Policies\RolePolicy',
+        'generator' => [
+               'option' => 'policies_and_permissions',
+                'policy_directory' => 'Policies',]
+    ];
+
     /**
      * Bootstrap any application services.
      */

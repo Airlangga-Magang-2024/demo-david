@@ -16,7 +16,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\TextEntry;
-use Illuminate\Support\Str; // Tambahkan ini
+use Illuminate\Support\Str; 
 use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\ProductResource\Pages;
 use Filament\Infolists\Components\RepeatableEntry;
@@ -101,7 +101,7 @@ class ProductResource extends Resource
                             Forms\Components\Section::make('Pricing')
                                 ->schema([
                                     \Filament\Forms\Components\TextInput::make('price')
-                                    ->currencyMask(thousandSeparator: ',',decimalSeparator: '.',precision: 2)
+                                    ->currencyMask(thousandSeparator: ',',decimalSeparator: '.',precision: 0)
                                     ->required(),
 
 
@@ -215,7 +215,7 @@ class ProductResource extends Resource
 
                 \Filament\Tables\Columns\TextColumn::make('price')
                 ->currency('IDR')
-                ->formatStateUsing(fn ($state) =>'RP '.number_format($state, 0, '.',',')),
+                ->formatStateUsing(fn ($state) =>''.number_format($state, 0, '.',',')),
 
             Tables\Columns\TextColumn::make('sku')
                 ->label('SKU')
@@ -285,9 +285,11 @@ class ProductResource extends Resource
     protected function getHeaderWidgets(): array
     {
         return [
-            // 
+            //
         ];
     }
+
+
 
 
     // public static function getWidgets(): array

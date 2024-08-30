@@ -4,6 +4,8 @@ namespace App\Filament\Widgets;
 
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log; // Tambahkan ini
+
 
 class CustomersChart extends ChartWidget
 {
@@ -18,6 +20,9 @@ class CustomersChart extends ChartWidget
 
     protected function getData(): array
     {
+
+        Log::info('Fetching customers data...');
+
         $customersData = DB::table('customers')
         ->selectRaw('HOUR(created_at) as hour, COUNT(*) as count')
         ->groupBy('hour')
@@ -25,6 +30,8 @@ class CustomersChart extends ChartWidget
         ->get()
         ->pluck('count', 'hour')
         ->toArray();
+
+        Log::info('Customers Data:', $customersData);
 
         $data = [];
         for ($hour = 1; $hour <= 12; $hour++) {

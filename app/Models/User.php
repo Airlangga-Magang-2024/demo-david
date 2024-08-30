@@ -15,6 +15,10 @@ use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Notifications\Notifiable; // Import trait Notifiable
+
+
 
 class User extends Authenticatable
 {
@@ -23,6 +27,7 @@ class User extends Authenticatable
     use HasFactory;
     use HasRoles;
     use HasPanelShield;
+    use Notifiable;
 
 
     /**
@@ -67,4 +72,6 @@ class User extends Authenticatable
     {
         return Team::all();
     }
+
+
 }

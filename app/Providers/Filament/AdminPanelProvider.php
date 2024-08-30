@@ -31,8 +31,10 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
 
-            // ->databaseNotifications()
-            // ->databaseNotificationsPolling('2s')
+
+
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('2s')
             ->sidebarCollapsibleOnDesktop()
             ->brandLogo(asset('images/logo.png'))
             ->brandName('Prelude')
@@ -76,6 +78,11 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->viteTheme('resources/css/filament/admin/theme.css');
-    }
+            ->viteTheme('resources/css/filament/admin/theme.css')
+
+            ->plugins([
+                // \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+
+            ]);
+    ;}
 }

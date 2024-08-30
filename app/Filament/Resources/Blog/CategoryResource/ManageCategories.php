@@ -18,8 +18,7 @@ class ManageCategories extends ManageRecords
     {
         return [
             \EightyNine\ExcelImport\ExcelImportAction::make()
-            // ->use(CategoryResource::class)
-            // ->importer(CategoryImporter::class)
+            //    ->color('danger') 
             ,
             Actions\CreateAction::make(),
             ExportAction::make()
