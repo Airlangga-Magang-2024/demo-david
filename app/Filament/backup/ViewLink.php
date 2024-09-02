@@ -4,18 +4,18 @@ namespace App\Filament\Resources\Blog\LinkResource\Pages;
 
 use App\Filament\Resources\Blog\LinkResource;
 use Filament\Actions;
-use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\ViewRecord;
 
-class CreateLink extends CreateRecord
+class ViewLink extends ViewRecord
 {
-    use CreateRecord\Concerns\Translatable;
-
     protected static string $resource = LinkResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            Actions\EditAction::make(),
+            // Hapus atau ganti LocaleSwitcher jika tidak tersedia
+            // Anda bisa membuat action lain sesuai kebutuhan
         ];
     }
 }

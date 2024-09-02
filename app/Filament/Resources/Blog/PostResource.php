@@ -220,9 +220,9 @@ class PostResource extends Resource
     public static function getRecordSubNavigation(Page $page): array
     {
         return $page->generateNavigationItems([
-            // Pages\ViewPost::class,
+            Pages\ViewPost::class,
             Pages\EditPost::class,
-            // Pages\ManagePostComments::class,
+            Pages\ManagePostComments::class,
         ]);
     }
 
@@ -236,9 +236,9 @@ class PostResource extends Resource
         return [
             'index' => Pages\ListPosts::route('/'),
             'create' => Pages\CreatePost::route('/create'),
-            // 'comments' => Pages\ManagePostComments::route('/{record}/comments'),
+            'comments' => Pages\ManagePostComments::route('/{record}/comments'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
-            // 'view' => Pages\ViewPost::route('/{record}'),
+            'view' => Pages\ViewPost::route('/{record}'),
         ];
     }
 

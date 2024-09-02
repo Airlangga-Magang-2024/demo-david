@@ -22,6 +22,8 @@ use App\Filament\Resources\ProductResource\Widgets\ProductStats;
 use App\Filament\Widgets\CustomersChart;
 use App\Filament\Widgets\LatestOrders;
 use App\Filament\Widgets\OrdersChart;
+use Filament\SpatieLaravelTranslatablePlugin;
+
 
 use App\Filament\Widgets\StatsOverviewWidget;
 
@@ -82,6 +84,8 @@ class AdminPanelProvider extends PanelProvider
 
             ->plugins([
                 // \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                SpatieLaravelTranslatablePlugin::make()
+                ->defaultLocales(['en', 'es']),
 
             ]);
     ;}

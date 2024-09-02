@@ -8,14 +8,15 @@ use Filament\Resources\Pages\ViewRecord;
 
 class ViewLink extends ViewRecord
 {
+    use ViewRecord\Concerns\Translatable;
+
     protected static string $resource = LinkResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\EditAction::make(),
-            // Hapus atau ganti LocaleSwitcher jika tidak tersedia
-            // Anda bisa membuat action lain sesuai kebutuhan
+            Actions\LocaleSwitcher::make(),
         ];
     }
 }

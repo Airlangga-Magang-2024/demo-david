@@ -11,7 +11,9 @@ use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
-use Filament\Resources\Concerns\Translatable;
+// use Filament\Resources\Concerns\Translatable;
+use Spatie\Translatable\HasTranslations;
+
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
@@ -19,7 +21,7 @@ use Filament\Tables\Table;
 
 class LinkResource extends Resource
 {
-    use Translatable;
+    use HasTranslations;
 
     protected static ?string $model = Link::class;
 
@@ -114,7 +116,7 @@ class LinkResource extends Resource
                     ->label('Visit link')
                     ->icon('heroicon-m-arrow-top-right-on-square')
                     ->color('gray')
-                    ->url(fn (Link $record): string => '#' . urlencode($record->url)),
+                    ->url(fn (Link $record): string => $record->url),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

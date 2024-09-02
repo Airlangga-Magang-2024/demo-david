@@ -4,18 +4,19 @@ namespace App\Filament\Resources\Blog\LinkResource\Pages;
 
 use App\Filament\Resources\Blog\LinkResource;
 use Filament\Actions;
-use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\ListRecords;
 
-class CreateLink extends CreateRecord
+class ListLinks extends ListRecords
 {
-    use CreateRecord\Concerns\Translatable;
+    // use ListRecords\Concerns\Translatable;
 
     protected static string $resource = LinkResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            Actions\CreateAction::make(),
+            // Actions\LocaleSwitcher::make(),
         ];
     }
 }

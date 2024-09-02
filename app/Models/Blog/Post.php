@@ -2,7 +2,7 @@
 
 namespace App\Models\Blog;
 
-use App\Models\Comment;
+use App\Models\Shop\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,11 +13,6 @@ class Post extends Model
 {
     use HasFactory;
     // use HasTags;
-
-    /**
-     * @var string
-     */
-    protected $table = 'blog_posts';
 
     protected $fillable = [
         'blog_author_id',
@@ -30,6 +25,12 @@ class Post extends Model
         'seo_description',
         'image',
     ];
+
+
+    /**
+     * @var string
+     */
+    protected $table = 'blog_posts';
 
     /**
      * @var array<string, string>
@@ -50,9 +51,9 @@ class Post extends Model
         return $this->belongsTo(Category::class, 'blog_category_id');
     }
 
-    // /** @return MorphMany<Comment> */
-    // public function comments(): MorphMany
-    // {
-    //     return $this->morphMany(Comment::class, 'commentable');
-    // }
+    /** @return MorphMany<Comment> */
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

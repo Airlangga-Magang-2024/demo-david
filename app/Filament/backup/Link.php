@@ -11,12 +11,6 @@ class Link extends Model
     use HasFactory;
     use HasTranslations;
 
-      public $translatable = [
-        'title',
-        'description',
-    ];
-
-
     protected $fillable = [
         'id',
         'url',
@@ -28,6 +22,11 @@ class Link extends Model
         'updated_at',
     ];
 
+    /** @var string[] */
+    public $translatable = [
+        'title',
+        'description',
+    ];
 
     protected $table = 'blog_links';
 }
