@@ -90,6 +90,7 @@ class ProductResource extends Resource
                              Forms\Components\Section::make('Image')
                     ->schema([
                         Forms\Components\FileUpload::make('image')
+                            ->downloadable()
                             ->image()
                             ->hiddenLabel(),
                     ])
@@ -184,9 +185,7 @@ class ProductResource extends Resource
                                     ->required(),
 
 
-                                    // Forms\Components\Select::make('categories_id') // Sesuaikan nama kolom jika diperlukan
-                                    // ->relationship('categories', 'name') // 'categories' adalah nama metode relasi di model Product
-                                    // ->required()
+
                                 ]),
                         ])
                         ->columnSpan(['lg' => 1]),

@@ -45,6 +45,7 @@ class LinkResource extends Resource
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('url')
+                    ->suffixIcon('heroicon-m-globe-alt')
                     ->label('URL')
                     ->required()
                     ->maxLength(255)

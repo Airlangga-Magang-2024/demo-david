@@ -79,6 +79,7 @@ class PostResource extends Resource
                 Forms\Components\Section::make('Image')
                     ->schema([
                         Forms\Components\FileUpload::make('image')
+                            ->downloadable()
                             ->image()
                             ->hiddenLabel(),
                     ])

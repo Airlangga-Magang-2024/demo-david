@@ -23,6 +23,7 @@ use App\Filament\Widgets\CustomersChart;
 use App\Filament\Widgets\LatestOrders;
 use App\Filament\Widgets\OrdersChart;
 use Filament\SpatieLaravelTranslatablePlugin;
+use Outerweb\FilamentTranslatableFields\Filament\Plugins\FilamentTranslatableFieldsPlugin;
 
 
 use App\Filament\Widgets\StatsOverviewWidget;
@@ -83,9 +84,14 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
 
             ->plugins([
-                // \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                // \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 SpatieLaravelTranslatablePlugin::make()
                 ->defaultLocales(['en', 'es']),
+                FilamentTranslatableFieldsPlugin::make()
+                ->supportedLocales([
+                    'en' => 'English',
+                    'nl' => 'Dutch',
+                ]),
 
             ]);
     ;}
